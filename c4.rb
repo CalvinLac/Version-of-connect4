@@ -14,10 +14,10 @@ class Connect4
        while true
            @board.render
            @currentplayer.get_coordinates
+           switch_players
            if game_over?
                break
            end
-           switch_players
        end
    end
 
@@ -39,7 +39,7 @@ class Connect4
    # end
 
    def check_win?
-       if @board.winning_combination
+       if @board.winning_combination?
            true
        else 
            false
@@ -49,8 +49,8 @@ class Connect4
    def switch_players
        if @currentplayer==@player1
            @currentplayer=@player2
-       else
-           @currentplayer==@player1
+       elsif @currentplayer == @player2 
+           @currentplayer=@player1
        end
    end
 end

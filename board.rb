@@ -34,7 +34,7 @@ class Board
        @column=column
        if column_avaliable?
        		puts "hihi"
-           @board[@column.to_i].unshift ("X")
+           @board[@column.to_i].unshift (symbol.to_s)
            @board[@column.to_i].pop
            @rowcoordinate=@board[@column.to_i].size-1
            puts "fjjfj"
@@ -52,7 +52,7 @@ class Board
        end
    end
 
-   def winning_combination
+   def winning_combination?
        winning_vertical?
        #winning_diagonal? || winning_vertical? || winning horizontal?
    end
