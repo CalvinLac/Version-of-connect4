@@ -1,5 +1,5 @@
 class Board 
-	def initialize()
+	def initialize
 		@board = Array.new(6){Array.new(7)}
 		@counter = 0
 		@column
@@ -13,7 +13,7 @@ class Board
 		end
 		@board.each do |row|
 			row.each do |cell|
-				cell.nil? ? print("-") : print cell.to_s
+				cell.nil? ? print("-") : print(cell.to_s)
 			end
 		puts
 		end
