@@ -1,3 +1,7 @@
+require './board.rb'
+require './player.rb'
+
+
 class Connect4    
    def initialize
        @board= Board.new
