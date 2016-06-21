@@ -60,7 +60,8 @@
 
 	#check for format 
 
-
+require 'board.rb' 
+require 'player.rb'
 
 
 class Connect4	
@@ -79,6 +80,7 @@ class Connect4
 			@currentplayer.get_coordinates
 			switch_players
 		end
+	end
 
 	def game_over?
 		if check_tie || check_win
@@ -109,9 +111,9 @@ class Connect4
 			@currentplayer=@player2
 		else
 			@currentplayer==@player1
+		end
 	end
 end
-
 
 
 

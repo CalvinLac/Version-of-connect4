@@ -1,10 +1,10 @@
 class Player 
 	def initialize(name,symbol,board)
-		attr_accessor :name :symbol
 		@name=name
 		@symbol=symbol
 		@board=board
 	end
+	attr_accessor :name, :symbol
 
 	def get_coordinates
 		while true
@@ -29,7 +29,7 @@ class Player
 		if column == (1..6)
 			puts "good format"
 		else
-			puts "Wront Format"
+			puts "Wrong Format"
 		end
 	end
 end
