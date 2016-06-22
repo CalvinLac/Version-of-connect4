@@ -40,6 +40,7 @@ class Connect4
 
    def check_win?
        if @board.winning_combination?
+       		puts "check win "
            true
        else 
            false

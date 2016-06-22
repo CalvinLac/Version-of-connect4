@@ -28,7 +28,7 @@ class Player
    end
 
    def check_for_format(column)
-       if column>=1 && column<=6
+       if column>=0 && column<=6
            puts "Good format"
            return true
        else

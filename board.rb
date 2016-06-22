@@ -29,21 +29,25 @@ class Board
    #         [@board[0][4],@board[1][4],@board[2][4],@board[3][4],@board[4][4],@board[5][4]],
    #         [@board[0][5],@board[1][5],@board[2][5],@board[3][5],@board[4][5],@board[5][5]]]
    # end
-
    def add_piece(column,symbol)
        @column=column
        if column_avaliable?
-       		puts "hihi"
-           @board[@column.to_i].unshift (symbol.to_s)
-           @board[@column.to_i].pop
-           @rowcoordinate=@board[@column.to_i].size-1
-           puts "fjjfj"
-           true
+            i=6
+            while true
+                if @board[column.to_i][i] == nil
+                    @board[column.to_i][i] = symbol
+                    @rowcoordinate=i
+                    break
+                else
+                    i-=1
+                    next
+                end
+            end
+            return true 
        else
            false
        end
    end
-
    def column_avaliable?
        if @board[@column.to_i].size <=7 
            return true 
@@ -51,19 +55,22 @@ class Board
            return false 
        end
    end
-
    def winning_combination?
-       winning_vertical?
+       winning_vertical? || winning_horizontal?
        #winning_diagonal? || winning_vertical? || winning horizontal?
    end
-
    def winning_vertical?
-       coordinate=[@column,@rowcoordinate]
-       verticalarray=[@board[@column.to_i][@rowcoordinate],@board[@column.to_i][@rowcoordinate.to_i+1],@board[@column.to_i][@rowcoordinate.to_i+2],@board[@column.to_i][@rowcoordinate.to_i+3]]
+       verticalarray=[@board[@column.to_i][6],@board[@column.to_i][5],@board[@column.to_i][4],@board[@column.to_i][3],@board[@column.to_i][2],@board[@column.to_i][1],@board[@column.to_i][0]]
        four_in_a_row?(verticalarray)
    end
-
    def four_in_a_row?(arr)
        arr.join.to_s.include?("XXXX") || arr.join.to_s.include?("OOOO")
    end
+
+  def winning_horizontal?
+      horizontalarray=[@board[0][@rowcoordinate],@board[1][@rowcoordinate],@board[2][@rowcoordinate],@board[3][@rowcoordinate],@board[4][@rowcoordinate],@board[5][@rowcoordinate]]
+      four_in_a_row?(horizontalarray)
+   end
+
+
 end
