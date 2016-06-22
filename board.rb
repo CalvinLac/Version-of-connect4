@@ -89,10 +89,10 @@ class Board
       d12 = [@board[5][3], @board[4][4], @board[3][5], @board[2][6]]
       arraydigagonals = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]
       arraydigagonals.each do |currentdig|
-        break if four_in_a_row?(currentdig)
+        return true if four_in_a_row?(currentdig)
+
       end
+      return false
+      end
+
   end
-
-
-
-end
