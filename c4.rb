@@ -1,5 +1,7 @@
 require './board.rb'
 require './player.rb'
+
+
 class Connect4
   def initialize
       @board= Board.new
@@ -9,6 +11,7 @@ class Connect4
       @player2= Player.new(gets.chomp,"O",@board)
       @currentplayer=@player1
   end
+
   def play
       while true
           @board.render
@@ -22,6 +25,7 @@ class Connect4
           end
       end
   end
+
   def game_over?
       # if check_tie || check_win
       if check_win?
@@ -30,6 +34,7 @@ class Connect4
           return false
       end
   end
+
   # def check_tie?
   #     if @board.full
   #         true
@@ -37,6 +42,7 @@ class Connect4
   #         false
   #     end
   # end
+
   def check_win?
       if @board.winning_combination?
           true
@@ -44,6 +50,7 @@ class Connect4
           false
       end
   end
+
   def switch_players
       if @currentplayer==@player1
           @currentplayer=@player2
@@ -52,5 +59,6 @@ class Connect4
       end
   end
 end
+
 c4=Connect4.new
 c4.play
