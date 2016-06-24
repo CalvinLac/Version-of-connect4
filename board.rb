@@ -75,7 +75,7 @@ class Board
 
 
    def winning_combination?
-       winning_vertical? || winning_horizontal? || winning_diagonal?
+       winning_vertical? || winning_horizontal? || winning_diagonal? 
    end
 
 
@@ -101,40 +101,96 @@ class Board
 
 #Hard code for the winning conditions of diagonal
    def winning_diagonal?
-      left1_column_checker = @column.to_i
-      left2_column_checker = @column.to_i
-      right_column_checker = @column.to_i
-      row1 = @rowcoordinate.to_i
-      row2 = @rowcoordinate.to_i
-      
-      left1pusher = []
-      one =1
-      two =2 
+    upleft?(@column.to_i,@rowcoordinate.to_i) || upright?(@column.to_i,@rowcoordinate.to_i)
+  end 
 
-      n = 0 
-      until n==4
-        left1 = []
-        left1pusher = @board[one][two]
-        left1 << left1pusher
-        n+=1
-        one +=1
-        two +=1 
+   def upleft? (tempcolumn, tempcordinate) 
+      n=0 
+      i=0
+      checkarray = []
+
+      checkpointcolumn = tempcolumn
+      checkpointcordinate = tempcordinate
+
+
+      until i ==4
+        if tempcolumn == -1 || tempcordinate == -1 || tempcolumn == 7 || tempcordinate == 6
+          break
+        else
+        checkarray.push @board[tempcolumn][tempcordinate]
+        tempcolumn += 1 
+        tempcordinate += 1
+        i += 1
+      end
+    end
+
+
+    tempcolumn = checkpointcolumn-1
+    tempcordinate = checkpointcordinate-1
+
+      until n ==3
+        if tempcolumn == -1 || tempcordinate == -1 || tempcolumn == 7 || tempcordinate == 6
+          break
+        else 
+        checkarray.unshift @board[tempcolumn][tempcordinate]
+        tempcolumn -= 1 
+        tempcordinate -= 1
+        n += 1
       end 
-
-
-      m = 0 
-      until m==4
-        left2 = []
-        left2pusher = [@board[left2_column_checker.to_i][row2.to_i]]
-        left2.push left2pusher
-        m+=1
-        [left2_column_checker +=1]
-        [row2 +=1] 
-      end 
-
-      four_in_a_row?(left1)
     end 
 
+    if four_in_a_row?(checkarray)
+      return true
+    else 
+      return false
+    end 
+
+    end 
+
+
+
+   def upright? (tempcolumn, tempcordinate) 
+      n=0 
+      i=0
+      checkarray = []
+
+      checkpointcolumn = tempcolumn
+      checkpointcordinate = tempcordinate
+
+
+      until i ==4
+        if tempcolumn == -1 || tempcordinate == -1 || tempcolumn == 7 || tempcordinate == 6
+          break
+        else
+        checkarray.push @board[tempcolumn][tempcordinate]
+        tempcolumn -= 1 
+        tempcordinate += 1
+        i += 1
+      end
+    end
+
+
+    tempcolumn = checkpointcolumn-1
+    tempcordinate = checkpointcordinate-1
+
+      until n ==3
+        if tempcolumn == -1 || tempcordinate == -1 || tempcolumn == 7 || tempcordinate == 6
+          break
+        else 
+        checkarray.unshift @board[tempcolumn][tempcordinate]
+        tempcolumn += 1 
+        tempcordinate -= 1
+        n += 1
+      end 
+    end 
+
+    if four_in_a_row?(checkarray)
+      return true
+    else 
+      return false
+    end 
+
+    end 
 
 
 
