@@ -1,3 +1,6 @@
+require './player.rb'
+
+
 #Class to enable transpose
 class Array
   def safe_transpose
@@ -35,24 +38,26 @@ class Board
        end
     end
    
-
+#method to add piece. Called on player class under get_cord 
    def add_piece(column,symbol)
        @column=column
        if column_avaliable?
           i=6
-          while true
+          while i >= 0 
+            #if column holds value "z", that means it is empty
             if @board[column.to_i][i] == "z"
               @board[column.to_i][i]= symbol
                @rowcoordinate=i
-              break
+              return true
             else
               i-=1
-              next
             end
           end
-          return true
-       else
-           false
+       #If column_available returns false, that must mean the column is full
+       #We then need to render the board and ask for a different coord and loop 
+       render
+       puts "That column is full, pick another one"
+       return false
        end
    end
 
@@ -65,6 +70,8 @@ class Board
        end
    end
 
+   #Used to determine if the top row of the board is completely filled
+   #If so, that must mean that the players produced a tie
    def full?
     if (@board[0][0] != "z" && @board[1][0] != "z" && @board[2][0] != "z" && @board[3][0] != "z" && @board[4][0] != "z" && @board[5][0] != "z" && @board[6][0] != "z")
       return true
@@ -99,11 +106,13 @@ class Board
    end
 
 
-#Hard code for the winning conditions of diagonal
+
    def winning_diagonal?
     upleft?(@column.to_i,@rowcoordinate.to_i) || upright?(@column.to_i,@rowcoordinate.to_i)
-  end 
+   end 
 
+
+   #Method for checking the diagonal win conditions
    def upleft? (tempcolumn, tempcordinate) 
       n=0 
       i=0
@@ -112,7 +121,9 @@ class Board
       checkpointcolumn = tempcolumn
       checkpointcordinate = tempcordinate
 
-
+      #Until 'i' loop checks for objects in the array that are one down and one right
+      #The loop runs four times or until it hits a border
+      #If the array is valid, the object within the array gets pushed to our checker
       until i ==4
         if tempcolumn == -1 || tempcordinate == -1 || tempcolumn == 7 || tempcordinate == 6
           break
@@ -124,7 +135,7 @@ class Board
       end
     end
 
-
+    #These variables are reduced by 1 to account for the duplicate of @board[tempcolumn][tempcordinate]
     tempcolumn = checkpointcolumn-1
     tempcordinate = checkpointcordinate-1
 
@@ -139,6 +150,8 @@ class Board
       end 
     end 
 
+    #After all the possible left side diagonals are added into our checkarray
+    #The checkarray is ran through our four_in_a_row checker method 
     if four_in_a_row?(checkarray)
       return true
     else 
@@ -168,6 +181,7 @@ class Board
         i += 1
       end
     end
+    puts checkarray
 
 
     tempcolumn = checkpointcolumn-1
@@ -191,32 +205,6 @@ class Board
     end 
 
     end 
-
-
-
-
-     # d1 = [@board[3][5],@board[2][4],@board[1][3],@board[0][2]]
-     # d2 = [@board[4][5],@board[3][4],@board[2][3],@board[1][2],@board[0][1]]
-     # d3 = [@board[5][5],@board[4][4],@board[3][3],@board[2][2],@board[1][1],@board[0][0]]
-     # d4 = [@board[0][0],@board[1][1],@board[2][2],@board[3][3],@board[4][4],@board[5][5]]
-     # d5 = [@board[2][0],@board[3][1],@board[4][2],@board[5][3],@board[6][4]]
-     # d6 = [@board[3][0],@board[4][1],@board[5][2],@board[6][3]]
-     # d7 =[@board[6][2],@board[5][3],@board[4][4],@board[3][5]]
-     # d8 =[@board[6][1],@board[5][2],@board[4][3],@board[3][4],@board[2][5]]
-     # d9 =[@board[6][0],@board[5][1],@board[4][2],@board[3][3],@board[2][4], @board[1][5]]
-     # d10 = [@board[5][0], @board[4][1], @board[3][2], @board[2][3], @board[1][4], @board[0][5]]
-     # d11 = [@board[4][0], @board[3][1], @board[2][2], @board[1][3], @board[0][4]]
-     # d12 = [@board[3][0], @board[2][1], @board[1][2], @board[0][3]]
-
-     # array_diagonals = [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12]
-     # array_diagonals.each { |current_diagonal|
-     #   if four_in_a_row?(current_diagonal)
-     #     return true
-     #   end
-
-     #   }
-     # return false
-
 
 
 end

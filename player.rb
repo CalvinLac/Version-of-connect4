@@ -5,6 +5,11 @@ class Player
        @board=board
    end
    attr_accessor :name, :symbol
+
+   def name_getter
+    @name
+   end
+
    def get_coordinates
        while true
            column=ask_for_coordinates
@@ -18,7 +23,7 @@ class Player
    def everything_valid
    end
    def ask_for_coordinates
-       puts "#{name}, where would you like to place a game piece? "
+       puts "#{name}, where would you like to place a #{symbol}? "
        column_number=gets.chomp
    end
    def check_for_format(column)
