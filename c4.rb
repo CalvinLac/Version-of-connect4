@@ -27,21 +27,12 @@ class Connect4
   end
 
   def game_over?
-      # if check_tie || check_win
       if check_win?
           return true
       else
           return false
       end
   end
-
-  # def check_tie?
-  #     if @board.full
-  #         true
-  #     else
-  #         false
-  #     end
-  # end
 
   def check_win?
       if @board.winning_combination?
