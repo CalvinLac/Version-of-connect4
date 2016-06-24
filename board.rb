@@ -1,4 +1,4 @@
-
+#Class to enable transpose
 class Array
   def safe_transpose
     max_size = self.map(&:size).max
@@ -7,7 +7,7 @@ class Array
 end
 
 
-
+#Main class that handles the game board 
 class Board
    def initialize
        @board = Array.new(7){Array.new(6, "z")}
@@ -16,7 +16,7 @@ class Board
        @rowcoordinate=0
    end
 
-   
+#Main render function   
    def render
        puts "--------- CONNECT 4 ---------"
        puts "-----------------------------"
@@ -91,6 +91,7 @@ class Board
    end
 
 
+#Hard code for the winning conditions of diagonal
    def winning_diagonal?
 
      d1 = [@board[3][5],@board[2][4],@board[1][3],@board[0][2]]
