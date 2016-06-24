@@ -23,6 +23,11 @@ class Connect4
           puts "GAME OVER!!! #{@currentplayer.name} is the winner!!"
               break
           end
+          if game_tie?
+          @board.render
+          puts "You have tied"
+          break
+          end 
       end
   end
 
@@ -33,6 +38,14 @@ class Connect4
           return false
       end
   end
+
+  def game_tie?
+    if @board.full?
+      return true
+    else 
+      return false
+    end 
+  end 
 
   def check_win?
       if @board.winning_combination?
